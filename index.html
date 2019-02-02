@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html ng-app="chatApp">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script>
+    <script src="bower_components/socket.io-client/socket.io.js"></script>
+    <!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
+    <script src="bower_components/angular-socket-io/socket.min.js"></script>
+    <script defer src="./chat-app.js"></script>
+    <!-- <link rel="stylesheet" href="chat-app.css" /> -->
+  </head>
+  <header>
+    <h1>Welcome to my AngularJS chat room!</h1>
+  </header>
+  <body>
+    <div ng-controller="chatController as chat">
+      <form id="text-form" ng-submit="chat.handleSubmit()">
+        <input
+        name="typedInput"
+        placeholder="New Words"
+        ng-keypress="chat.handleNewWords()"
+        ng-model="chat.typedInput"
+        />
+      </form>
+      <!-- <ul>
+        <li ng-repeat="words in chat.words track by $index">
+          {{words}}
+        </li>
+      </ul> -->
+      <h2>Current input: {{chat.typedInput}}</h2>
+      <hr />
+      <h2>History</h2>
+      <ul ng-repeat="history in chat.history track by $index">
+        <li >
+          {{history}}
+          <button type="button" ng-click="chat.handleDelete($index)">Delete</button>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
